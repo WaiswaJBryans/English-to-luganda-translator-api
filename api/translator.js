@@ -5,12 +5,16 @@
 //author: Waiswa Joseph Bryan
 
 import * as dotenv from 'dotenv';
+import cors from 'cors';
 
+import express from 'express';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 
 dotenv.config();
-
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 //initialize model
 const model = new ChatGoogleGenerativeAI({
@@ -19,10 +23,7 @@ const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GOOGLE_API_KEY,
 });
 
- export default async function handler(req, res) {
-     if (req.method !== 'POST') { 
-         res.status(405).json({ error: 'only post requests are Allowed' });
-     }
+app.post('/translator', async (req, res) => {
     try {
         const { text } = req.body;
         if (!text) { 
@@ -43,14 +44,13 @@ const model = new ChatGoogleGenerativeAI({
             translation: response.content,
 
          });
-       
 
     } catch (error) {
-        //console.error('Error processing request:', error);
+        
         res.status(500).json({
             success: false,
             error: error.message || 'Internal Server Error',
        
         });
     }
-};
+});
