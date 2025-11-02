@@ -54,3 +54,5 @@ app.post('/translator', async (req, res) => {
         });
     }
 });
+
+module.exports = serverless(app);
