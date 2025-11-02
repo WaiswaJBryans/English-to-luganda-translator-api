@@ -6,7 +6,7 @@ It translates English text into **Luganda** through a simple POST request.
 
 ---
 
-## 🚀 Features
+## Features
 
 -  **English → Luganda translation** using Google Gemini 2.0 Flash  
 -  **Built with LangChain** prompt templates for better control  
@@ -128,3 +128,4 @@ This project is licensed under the MIT License — feel free to use, modify, and
  If this project helped you, please give it a star on GitHub!
 
 ---
+
